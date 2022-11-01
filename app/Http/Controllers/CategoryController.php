@@ -14,18 +14,18 @@ class CategoryController extends Controller
      */
     public function index()
     {
-            //    number-1
+            //   Option-1
     //  $data['categories'] = category::all();
     //  dd($data) ;
     // return view('backend.category.index',$data); 
 
 
-                 //    number-2
+                 //   Option-2
     //$categories = category::all(); 
    //return view('backend.category.index',['categories'=>$categories]); 
 
 
-              //    number-3
+              //    Option-3
    $categories = category::all();
     return view('backend.category.index',compact('categories'));
     }
