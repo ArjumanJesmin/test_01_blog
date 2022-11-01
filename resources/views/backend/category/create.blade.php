@@ -16,10 +16,11 @@
         <div class="row">
           <div class="col-md-6">
             <h1>Create Category!</h1>
-            <form action="">
+            <form action="{{ route('categories.store') }}" method="post">
+              @csrf
                <div class="form-group">
                  <label for="name">Category Name</label>
-                 <input type="text" class="form-control"  id="name" placeholder=" Category Name">
+                 <input type="text" class="form-control"  id="name" name="name" placeholder="Category Name">
                </div>
               
               <div class="form-group">
