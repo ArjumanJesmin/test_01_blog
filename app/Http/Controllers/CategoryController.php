@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryFormRequest;
+use App\Http\Requests\StoreCategoryRequest;
 use App\Models\category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller
 {
@@ -47,19 +50,32 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryFormRequest $request)
     {
 
-      $validatedData = $request->validate([
-         'name' => ['required'],
-         'description' => ['required'],
-     ]);
+   //    $validatedData = $request->validate([
+   //      
+   //   ]);
     // dd($request->all());
+      $request->validated();
+
      category::create([
         'name' =>$request->name,
          'description'=>$request->description,
       ]);
-       return redirect()->route('categories.index');
+      // option -1
+     // $request->session()->flash('success', 'Category created successful!');
+
+      // option -02
+     // session()->flash('success', 'Category created successful!');
+
+       // option -03
+      //  Session::flash('success', 'Category created successful!');
+      //  return redirect()->route('categories.index');
+
+        // option -04
+       return redirect()->route('categories.index')->with('success', 'Category created successful!');
+
     }
 
     /**
@@ -107,7 +123,7 @@ class CategoryController extends Controller
      * @param  \App\Models\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, category $category)
+    public function update(CategoryFormRequest $request, category $category)
     {
        // Option-01
         // $data['name'] = $request->name;
@@ -122,7 +138,7 @@ class CategoryController extends Controller
     //      'description'=>$request->description,
     //      ]);
     //    return redirect()->route('categories.index');
-
+          $request->validated();
        // Option-03
          $category->update($request->all());
         return redirect()->route('categories.index');

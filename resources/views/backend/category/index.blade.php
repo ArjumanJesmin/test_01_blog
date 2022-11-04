@@ -5,8 +5,30 @@
 <div class="row">
  
   <div class="col-md-6">
-    <a class="btn btn-info" href="{{ route('categories.create') }}">Create Categories</a>
-    <h1>Create Category!</h1>
+    <a class="btn btn-primary" href="{{ route('categories.create') }}">Create Categories</a>
+
+    {{-- option -01 --}}
+    {{-- @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif --}}
+
+     {{-- option -02 --}}
+    {{-- @if (session()->has('success'))
+    <div class="alert alert-success">
+        {{ session()->get('success') }}
+    </div>
+@endif --}}
+     {{-- option -02 --}}
+    @if (session()->has('success'))
+    <div class="alert alert-success" id="alert">
+        {{ session()->get('success') }}
+    </div>
+@endif
+
+
+    <h1>All Category!</h1>
     <table class=" table table-striped table-hover table-success table-bordered ">
         <thead>
             <tr>
